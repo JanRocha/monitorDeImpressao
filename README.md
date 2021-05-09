@@ -1,1 +1,1 @@
-# Sistema de gernciamento de impressão de arquivos PDF
+# Sistema de gerenciamento de impressão de arquivos PDF
