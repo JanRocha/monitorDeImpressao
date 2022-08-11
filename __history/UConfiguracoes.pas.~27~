@@ -1,0 +1,46 @@
+unit UConfiguracoes;
+
+interface
+uses
+  System.SysUtils,
+  UFuncoes;
+
+type
+  TConfiguracoes = class
+  private
+    FFuncoes: TFuncoes;
+    FIni:string;
+    FNomeImpressora: string;
+    FCaminhoServidor: string;
+    FCodigoCliente: string;
+  published
+    property NomeImpressora: string read FNomeImpressora write FNomeImpressora;
+    property CaminhoServidor: string read FCaminhoServidor write FCaminhoServidor;
+    property CodigoCliente:string read FCodigoCliente write FCodigoCliente;
+  public
+    procedure Gravar();
+    constructor Create();
+    destructor Destroy; override;
+  end;
+
+implementation
+
+constructor TConfiguracoes.Create;
+begin
+  Fini:= GetCurrentDir + '/CONFIG.INI';
+  FFuncoes:= TFuncoes.Create;
+  FFuncoes.SerializarINI(Fini,'CONFIG', Self);
+end;
+
+destructor TConfiguracoes.Destroy;
+begin
+  FFuncoes.Free;
+  inherited;
+end;
+
+procedure TConfiguracoes.Gravar;
+begin
+  FFuncoes.GravarINI(Fini, 'CONFIG', Self);
+end;
+
+end.

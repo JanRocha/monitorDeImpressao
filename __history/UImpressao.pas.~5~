@@ -1,0 +1,50 @@
+unit UImpressao;
+
+interface
+
+uses
+  Winapi.Windows,
+  Vcl.Printers,
+  Winapi.ShellAPI,
+  System.SysUtils;
+
+type
+  TImpressaoPDF = class
+  private
+    FnomeImpressora: string;
+  published
+    property nomeImpressora: string read FnomeImpressora write FnomeImpressora;
+    procedure PrintFile(aFile: TFileName);
+  end;
+
+implementation
+
+{ TImpressaoPDF }
+
+procedure TImpressaoPDF.PrintFile(aFile: TFileName);
+var
+  Device     : array[0..255] of Char;
+  Driver     : array[0..255] of Char;
+  Port       : array[0..255] of Char;
+  S          : string;
+  hDeviceMode: THandle;
+  i          : Integer;
+  vPrinter   : TPrinter;
+begin
+   Printer.PrinterIndex := -1;
+
+  for i := 0 to Printer.Printers.Count - 1 do
+  begin
+    if Printer.printers[i] = nomeImpressora then
+    begin
+      vPrinter              := TPrinter.Create;
+      vPrinter.PrinterIndex := i;
+      vPrinter.GetPrinter(Device,Driver,Port,hDeviceMode);
+      S                     := Format('"%s" "%s" "%s"',[Device,Driver,Port]);
+      ShellExecute(0, 'open', PChar('AcroRd32.exe'), PChar('/p /h ' + AFile), nil, SW_HIDE);
+      vPrinter.Free;
+    end;
+  end;
+end;
+
+end.

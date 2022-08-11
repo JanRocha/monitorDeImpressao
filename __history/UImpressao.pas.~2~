@@ -1,0 +1,10 @@
+unit UImpressao;
+
+interface
+
+uses
+  Vcl.Printers, Winapi.ShellAPI;
+
+implementation
+
+end.

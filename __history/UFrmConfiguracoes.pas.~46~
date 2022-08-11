@@ -1,0 +1,211 @@
+unit UFrmConfiguracoes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Vcl.ExtCtrls,
+  Vcl.StdCtrls,
+  Vcl.Buttons,
+  Vcl.Printers,
+  ACBrPosPrinter,
+  Controller.Impressora,
+  UConfiguracoes, Vcl.Samples.Spin;
+
+type
+  TfrmConfiguracoes = class(TForm)
+    Panel1: TPanel;
+    GroupBox1: TGroupBox;
+    edtCaminhoServidor: TEdit;
+    GroupBox2: TGroupBox;
+    cmbImpressoras: TComboBox;
+    BitBtn1: TBitBtn;
+    GroupBox3: TGroupBox;
+    edtCodCliente: TEdit;
+    GroupBox4: TGroupBox;
+    edtVias: TEdit;
+    GroupBox5: TGroupBox;
+    edtSequencia: TEdit;
+    gbConfiguracao: TGroupBox;
+    Label2: TLabel;
+    Label4: TLabel;
+    Label3: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    cbxModeloDAV: TComboBox;
+    cbxPortaDAV: TComboBox;
+    seColunasDav: TSpinEdit;
+    seEspLinhasDAV: TSpinEdit;
+    cbxPagCodigoDAV: TComboBox;
+    seLinhasBufferDav: TSpinEdit;
+    seLinhasPularDAV: TSpinEdit;
+    cbCortarPapelDAV: TCheckBox;
+    GroupBox6: TGroupBox;
+    edtSequenciaTXT: TEdit;
+    grp1: TGroupBox;
+    lbl1: TLabel;
+    lbl2: TLabel;
+    lbl3: TLabel;
+    lbl4: TLabel;
+    lbl5: TLabel;
+    seLargura: TSpinEdit;
+    seFundo: TSpinEdit;
+    seTopo: TSpinEdit;
+    seEsquerda: TSpinEdit;
+    seDireita: TSpinEdit;
+    rgTipoComprovante: TRadioGroup;
+    GroupBox7: TGroupBox;
+    edtSequenciaXML: TEdit;
+    procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+  private
+    FConf:TConfiguracoes;
+    Fimpressao: TControllerImpressora;
+
+    procedure CarregarSerial(Sender: TComboBox);
+    procedure CarregarModelo(Sender: TComboBox);
+    procedure CarregarPaginaCodigo(Sender: TComboBox);
+  public
+    { Public declarations }
+  end;
+
+var
+  frmConfiguracoes: TfrmConfiguracoes;
+
+implementation
+
+uses
+  System.TypInfo;
+
+
+{$R *.dfm}
+
+procedure TfrmConfiguracoes.BitBtn1Click(Sender: TObject);
+begin
+  FConf.NomeImpressora     := cmbImpressoras.Text;
+  FConf.CodigoCliente      := edtCodCliente.Text;
+  FConf.CaminhoServidor    := edtCaminhoServidor.Text;
+  FConf.quantidade_de_vias := StrToInt(edtVias.Text);
+  FConf.Sequencia          := StrToInt(edtSequencia.Text);
+  FConf.SequenciaTXT       := StrToInt(edtSequenciaTXT.Text);
+
+  FConf.top      := seTopo.Value;
+  FConf.largura  := seLargura.Value;
+  FConf.fundo    := seFundo.Value;
+  FConf.direita  := seDireita.Value;
+  FConf.esqueda  := seEsquerda.Value;
+  FConf.tipo     := rgTipoComprovante.ItemIndex;
+  FConf.Gravar();
+
+  FImpressao.Modelo            := cbxModeloDAV.ItemIndex;
+  Fimpressao.Porta             := cbxPortaDAV.Text;
+  Fimpressao.Colunas           := seColunasDav.Value;
+  Fimpressao.EspacoEntreLinhas := seEspLinhasDAV.Value;
+  Fimpressao.LinhasBuffer      := seLinhasBufferDav.Value;
+  Fimpressao.LinhasPular       := seLinhasPularDAV.Value;
+  Fimpressao.PaginaDeCodigo    := cbxPagCodigoDAV.ItemIndex;
+  Fimpressao.CortarPapel       := cbCortarPapelDAV.Checked;
+  Fimpressao.Gravar();
+
+  Close();
+end;
+
+procedure TfrmConfiguracoes.CarregarModelo(Sender: TComboBox);
+var
+  I: TACBrPosPrinterModelo;
+begin
+  Sender.Items.Clear;
+  For I := Low(TACBrPosPrinterModelo) to High(TACBrPosPrinterModelo) do
+    Sender.Items.Add(GetEnumName(TypeInfo(TACBrPosPrinterModelo), integer(I)));
+  Sender.ItemIndex:= 0;
+end;
+
+procedure TfrmConfiguracoes.CarregarPaginaCodigo(Sender: TComboBox);
+var
+  J: TACBrPosPaginaCodigo;
+begin
+  Sender.Items.Clear;
+  For J := Low(TACBrPosPaginaCodigo) to High(TACBrPosPaginaCodigo) do
+    Sender.Items.Add(GetEnumName(TypeInfo(TACBrPosPaginaCodigo),integer(J)));
+  Sender.ItemIndex:= 0;
+end;
+
+procedure TfrmConfiguracoes.CarregarSerial(Sender: TComboBox);
+begin
+  Sender.Items.Clear;
+  Fimpressao.ACBrPosPrinter.Device.AcharPortasSeriais(Sender.Items);
+  {$IfDef MSWINDOWS}
+  Fimpressao.ACBrPosPrinter.Device.AcharPortasUSB(Sender.Items);
+  {$EndIf}
+  Fimpressao.ACBrPosPrinter.Device.AcharPortasRAW(Sender.Items);
+  {$IfDef HAS_BLUETOOTH}
+  try
+     Fimpressao.ACBrPosPrinter.Device.AcharPortasBlueTooth(Sender.Items);
+  except
+  end;
+  {$EndIf}
+  Sender.ItemIndex:= 0;
+end;
+
+procedure TfrmConfiguracoes.FormCreate(Sender: TObject);
+begin
+  FConf:= TConfiguracoes.Create;
+  Fimpressao:= TControllerImpressora.create;
+  CarregarSerial(cbxPortaDAV);
+  CarregarModelo(cbxModeloDAV);
+  CarregarPaginaCodigo(cbxPagCodigoDAV);
+
+  cbxModeloDAV.ItemIndex     := Fimpressao.Modelo;
+  cbxPortaDAV.ItemIndex      := cbxPortaDAV.Items.IndexOf(Fimpressao.Porta);
+  seColunasDav.Value         := Fimpressao.Colunas;
+  seEspLinhasDAV.Value       := Fimpressao.EspacoEntreLinhas;
+  seLinhasBufferDav.Value    := Fimpressao.LinhasBuffer;
+  seLinhasPularDAV.Value     := Fimpressao.LinhasPular;
+  cbxPagCodigoDAV.ItemIndex  := Fimpressao.PaginaDeCodigo;
+  cbCortarPapelDAV.Checked   := Fimpressao.CortarPapel;
+
+end;
+
+procedure TfrmConfiguracoes.FormDestroy(Sender: TObject);
+begin
+  FConf.Free;
+  Fimpressao.Free;
+end;
+
+procedure TfrmConfiguracoes.FormShow(Sender: TObject);
+var i:integer;
+begin
+  for i := 0 to Printer.Printers.Count - 1  do
+  begin
+    cmbImpressoras.Items.Add(Printer.Printers[i]);
+  end;
+
+  for i := 0 to cmbImpressoras.Items.Count do
+  begin
+    if cmbImpressoras.Items[i] = FConf.NomeImpressora then
+    begin
+      cmbImpressoras.ItemIndex := i;
+      continue;
+    end;
+  end;
+  edtCaminhoServidor.Text:= FConf.CaminhoServidor;
+  edtCodCliente.Text     := FConf.CodigoCliente;
+  edtVias.Text           := IntToStr(FConf.quantidade_de_vias);
+  edtSequencia.Text      := IntToStr(FConf.Sequencia);
+  edtSequenciaTXT.Text   := IntToStr(FConf.SequenciaTXT);
+  seLargura.Value        := FConf.largura;
+  seFundo.Value          := FConf.fundo;
+  seTopo.Value           := FConf.top;
+  seEsquerda.Value       := FConf.esqueda;
+  seDireita.Value        := FConf.direita;
+  rgTipoComprovante.ItemIndex := FConf.tipo;
+end;
+
+end.

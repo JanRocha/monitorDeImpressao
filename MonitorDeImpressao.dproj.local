@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2021/03/17 00:32:41.000.608,=C:\Users\janjr\Documents\Embarcadero\Studio\Projects\AppletModule1.pas</Transaction>
+    <Transaction>2021/03/17 19:25:48.000.679,=C:\Users\janjr\Documents\Embarcadero\Studio\Projects\Unit3.pas</Transaction>
+    <Transaction>2021/03/17 19:26:11.000.160,C:\Users\janjr\Documents\Embarcadero\Studio\Projects\Unit3.pas=C:\Projetos\monitorDeImpressao\UPrincipal.pas</Transaction>
+    <Transaction>2021/03/17 19:26:11.000.160,C:\Users\janjr\Documents\Embarcadero\Studio\Projects\Unit3.dfm=C:\Projetos\monitorDeImpressao\UPrincipal.dfm</Transaction>
+    <Transaction>2021/03/17 19:26:29.000.596,C:\Users\janjr\Documents\Embarcadero\Studio\Projects\Project2.dproj=C:\Projetos\monitorDeImpressao\MonitorDeImpressao.dproj</Transaction>
+    <Transaction>2021/03/17 19:32:25.000.157,=C:\Projetos\monitorDeImpressao\Unit1.pas</Transaction>
+    <Transaction>2021/03/17 19:33:26.000.966,C:\Projetos\monitorDeImpressao\Unit1.pas=C:\Projetos\monitorDeImpressao\UImpressao.pas</Transaction>
+    <Transaction>2021/03/17 20:05:18.000.518,C:\Projetos\monitorDeImpressao\UImpressao.pas=C:\Projetos\monitorDeImpressao\UImpressaoPDF.pas</Transaction>
+    <Transaction>2021/03/17 22:17:26.000.414,=C:\Projetos\monitorDeImpressao\Unit1.pas</Transaction>
+    <Transaction>2021/03/17 22:22:41.000.455,C:\Projetos\monitorDeImpressao\UFrmConfiguracoes.dfm=C:\Projetos\monitorDeImpressao\Unit1.dfm</Transaction>
+    <Transaction>2021/03/17 22:22:41.000.455,C:\Projetos\monitorDeImpressao\UFrmConfiguracoes.pas=C:\Projetos\monitorDeImpressao\Unit1.pas</Transaction>
+    <Transaction>2021/03/17 22:39:54.000.800,=C:\Projetos\monitorDeImpressao\Unit1.pas</Transaction>
+    <Transaction>2021/03/17 22:40:05.000.453,C:\Projetos\monitorDeImpressao\UConfiguracoes.pas=C:\Projetos\monitorDeImpressao\Unit1.pas</Transaction>
+    <Transaction>2021/03/17 22:42:35.000.850,=C:\Projetos\monitorDeImpressao\UFuncoes.pas</Transaction>
+    <Transaction>2021/06/29 21:10:40.000.970,=C:\Projetos\monitorDeImpressao\Controller.Impressora.pas</Transaction>
+    <Transaction>2021/06/30 16:32:23.000.502,=C:\Projetos\monitorDeImpressao\Unit1.pas</Transaction>
+    <Transaction>2021/06/30 16:32:56.000.026,C:\Projetos\monitorDeImpressao\Unit1.pas=C:\Projetos\monitorDeImpressao\UImpressaoTXT.pas</Transaction>
+    <Transaction>2021/07/01 12:05:22.000.188,=C:\Projetos\monitorDeImpressao\Unit1.pas</Transaction>
+    <Transaction>2021/07/01 12:05:45.000.096,C:\Projetos\monitorDeImpressao\UImpressaoXML.pas=C:\Projetos\monitorDeImpressao\Unit1.pas</Transaction>
+    <Transaction>2022/08/08 20:59:12.000.352,=C:\Users\Jan\OneDrive\Documentos\Embarcadero\Studio\19.0\Imports\AcroPDFLib_TLB.pas</Transaction>
+    <Transaction>2022/08/08 21:11:02.000.593,C:\Users\Jan\OneDrive\Documentos\Embarcadero\Studio\19.0\Imports\AcroPDFLib_TLB.pas=</Transaction>
+  </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="UFrmConfiguracoes.pas"/>
+    <File Path="UFrmConfiguracoes.dfm"/>
+    <File Path="UPrincipal.pas"/>
+    <File Path="UPrincipal.dfm"/>
+    <File Path="UConfiguracoes.pas"/>
+    <File Path="UFuncoes.pas"/>
+    <File Path="UImpressaoPDF.pas"/>
+    <File Path="Controller.Impressora.pas"/>
+    <File Path="UImpressaoTXT.pas"/>
+    <File Path="UImpressaoXML.pas"/>
+  </ProjectSortOrder>
+</BorlandProject>

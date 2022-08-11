@@ -1,0 +1,415 @@
+object frmConfiguracoes: TfrmConfiguracoes
+  Left = 0
+  Top = 0
+  Caption = 'Configura'#231#245'es'
+  ClientHeight = 512
+  ClientWidth = 734
+  Color = clBtnFace
+  Font.Charset = ANSI_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -16
+  Font.Name = 'Arial'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 18
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 734
+    Height = 512
+    Align = alClient
+    BevelOuter = bvNone
+    TabOrder = 0
+    object GroupBox1: TGroupBox
+      Left = 2
+      Top = 11
+      Width = 532
+      Height = 52
+      Caption = 'Endere'#231'o da Pasta Externa'
+      TabOrder = 0
+      object edtCaminhoServidor: TEdit
+        Left = 3
+        Top = 20
+        Width = 525
+        Height = 26
+        TabOrder = 0
+      end
+    end
+    object GroupBox2: TGroupBox
+      Left = 4
+      Top = 118
+      Width = 723
+      Height = 52
+      Caption = 'Selecione a Impressora '
+      TabOrder = 1
+      object cmbImpressoras: TComboBox
+        Left = 1
+        Top = 20
+        Width = 718
+        Height = 26
+        TabOrder = 0
+      end
+    end
+    object BitBtn1: TBitBtn
+      Left = 630
+      Top = 474
+      Width = 104
+      Height = 38
+      Caption = 'Gravar'
+      TabOrder = 2
+      OnClick = BitBtn1Click
+    end
+    object GroupBox3: TGroupBox
+      Left = 538
+      Top = 11
+      Width = 189
+      Height = 52
+      Caption = 'C'#243'digo do cliente'
+      TabOrder = 3
+      object edtCodCliente: TEdit
+        Left = 2
+        Top = 20
+        Width = 183
+        Height = 26
+        TabOrder = 0
+      end
+    end
+    object GroupBox4: TGroupBox
+      Left = 538
+      Top = 68
+      Width = 189
+      Height = 52
+      Caption = 'Quantidade de Vias'
+      TabOrder = 4
+      object edtVias: TEdit
+        Left = 2
+        Top = 20
+        Width = 183
+        Height = 26
+        TabOrder = 0
+      end
+    end
+    object GroupBox5: TGroupBox
+      Left = 2
+      Top = 68
+      Width = 161
+      Height = 52
+      Caption = 'Sequencia PDF'
+      TabOrder = 5
+      object edtSequencia: TEdit
+        Left = 3
+        Top = 20
+        Width = 151
+        Height = 26
+        TabOrder = 0
+      end
+    end
+    object gbConfiguracao: TGroupBox
+      Left = 4
+      Top = 176
+      Width = 725
+      Height = 145
+      Caption = 'Impress'#227'o TXT'
+      TabOrder = 6
+      object Label2: TLabel
+        Left = 16
+        Top = 16
+        Width = 52
+        Height = 18
+        Caption = 'Modelo'
+        Color = clBtnFace
+        ParentColor = False
+      end
+      object Label4: TLabel
+        Left = 191
+        Top = 16
+        Width = 38
+        Height = 18
+        Caption = 'Porta'
+        Color = clBtnFace
+        ParentColor = False
+      end
+      object Label3: TLabel
+        Left = 16
+        Top = 66
+        Width = 57
+        Height = 18
+        Caption = 'Colunas'
+        Color = clBtnFace
+        ParentColor = False
+      end
+      object Label5: TLabel
+        Left = 90
+        Top = 66
+        Width = 62
+        Height = 18
+        Caption = 'Espa'#231'os'
+        Color = clBtnFace
+        ParentColor = False
+      end
+      object Label6: TLabel
+        Left = 557
+        Top = 12
+        Width = 81
+        Height = 18
+        Caption = 'Pag.codigo'
+        Color = clBtnFace
+        ParentColor = False
+      end
+      object Label7: TLabel
+        Left = 161
+        Top = 66
+        Width = 41
+        Height = 18
+        Caption = 'Buffer'
+        Color = clBtnFace
+        ParentColor = False
+      end
+      object Label8: TLabel
+        Left = 223
+        Top = 66
+        Width = 99
+        Height = 18
+        Caption = 'Linhas '#224' Pular'
+        Color = clBtnFace
+        ParentColor = False
+      end
+      object cbxModeloDAV: TComboBox
+        Left = 16
+        Top = 34
+        Width = 169
+        Height = 26
+        Style = csDropDownList
+        TabOrder = 0
+      end
+      object cbxPortaDAV: TComboBox
+        Left = 191
+        Top = 34
+        Width = 364
+        Height = 26
+        TabOrder = 1
+      end
+      object seColunasDav: TSpinEdit
+        Left = 16
+        Top = 86
+        Width = 71
+        Height = 28
+        MaxValue = 999
+        MinValue = 1
+        TabOrder = 2
+        Value = 48
+      end
+      object seEspLinhasDAV: TSpinEdit
+        Left = 90
+        Top = 86
+        Width = 69
+        Height = 28
+        MaxValue = 255
+        MinValue = 0
+        TabOrder = 3
+        Value = 0
+      end
+      object cbxPagCodigoDAV: TComboBox
+        Left = 557
+        Top = 34
+        Width = 117
+        Height = 26
+        Hint = 'Pagina de c'#243'digo usada pela Impressora POS'
+        Style = csDropDownList
+        TabOrder = 7
+      end
+      object seLinhasBufferDav: TSpinEdit
+        Left = 161
+        Top = 86
+        Width = 51
+        Height = 28
+        MaxValue = 255
+        MinValue = 0
+        TabOrder = 4
+        Value = 0
+      end
+      object seLinhasPularDAV: TSpinEdit
+        Left = 223
+        Top = 86
+        Width = 99
+        Height = 28
+        MaxValue = 255
+        MinValue = 0
+        TabOrder = 5
+        Value = 0
+      end
+      object cbCortarPapelDAV: TCheckBox
+        Left = 349
+        Top = 89
+        Width = 113
+        Height = 19
+        Hint = 
+          'Conecta a Porta Serial a cada comando enviado'#13#10'Desconecta da Por' +
+          'ta Serial ap'#243's o envio'
+        Caption = 'Cortar Papel'
+        Checked = True
+        State = cbChecked
+        TabOrder = 6
+      end
+    end
+    object GroupBox6: TGroupBox
+      Left = 169
+      Top = 68
+      Width = 161
+      Height = 52
+      Caption = 'Sequencia TXT'
+      TabOrder = 7
+      object edtSequenciaTXT: TEdit
+        Left = 3
+        Top = 20
+        Width = 151
+        Height = 26
+        TabOrder = 0
+      end
+    end
+    object grp1: TGroupBox
+      Left = 5
+      Top = 330
+      Width = 721
+      Height = 75
+      Caption = 'Margens'
+      TabOrder = 8
+      object lbl1: TLabel
+        Left = 45
+        Top = 16
+        Width = 54
+        Height = 18
+        Caption = 'Largura'
+      end
+      object lbl2: TLabel
+        Left = 117
+        Top = 16
+        Width = 44
+        Height = 18
+        Caption = 'Fundo'
+      end
+      object lbl3: TLabel
+        Left = 185
+        Top = 16
+        Width = 34
+        Height = 18
+        Caption = 'Topo'
+      end
+      object lbl4: TLabel
+        Left = 258
+        Top = 16
+        Width = 68
+        Height = 18
+        Caption = 'Esquerda'
+      end
+      object lbl5: TLabel
+        Left = 334
+        Top = 16
+        Width = 47
+        Height = 18
+        Caption = 'Direita'
+      end
+      object seLargura: TSpinEdit
+        Left = 46
+        Top = 32
+        Width = 64
+        Height = 28
+        MaxValue = 0
+        MinValue = 0
+        TabOrder = 0
+        Value = 0
+      end
+      object seFundo: TSpinEdit
+        Left = 116
+        Top = 32
+        Width = 64
+        Height = 28
+        MaxValue = 0
+        MinValue = 0
+        TabOrder = 1
+        Value = 0
+      end
+      object seTopo: TSpinEdit
+        Left = 186
+        Top = 32
+        Width = 64
+        Height = 28
+        MaxValue = 0
+        MinValue = 0
+        TabOrder = 2
+        Value = 0
+      end
+      object seEsquerda: TSpinEdit
+        Left = 259
+        Top = 32
+        Width = 64
+        Height = 28
+        MaxValue = 0
+        MinValue = 0
+        TabOrder = 3
+        Value = 0
+      end
+      object seDireita: TSpinEdit
+        Left = 333
+        Top = 32
+        Width = 64
+        Height = 28
+        MaxValue = 0
+        MinValue = 0
+        TabOrder = 4
+        Value = 0
+      end
+    end
+    object rgTipoComprovante: TRadioGroup
+      Left = 241
+      Top = 414
+      Width = 225
+      Height = 83
+      Caption = 'Tipo de Comprovante'
+      Items.Strings = (
+        'Detalhado (com os itens)'
+        'Resumido (sem os itens)')
+      TabOrder = 9
+    end
+    object grp2: TGroupBox
+      Left = 5
+      Top = 414
+      Width = 186
+      Height = 83
+      Caption = 'Impressora'
+      TabOrder = 10
+      object lblImpressora: TLabel
+        Left = 9
+        Top = 28
+        Width = 93
+        Height = 18
+        Caption = 'llbImpressora'
+        Color = clBtnFace
+        ParentColor = False
+      end
+      object btnDefinirImpressora: TSpeedButton
+        Left = 9
+        Top = 45
+        Width = 122
+        Height = 25
+        Caption = 'Definir Impressora'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        OnClick = btnDefinirImpressoraClick
+      end
+    end
+  end
+  object prtimpressora: TPrintDialog
+    Left = 200
+    Top = 440
+  end
+end

@@ -1,0 +1,17 @@
+program MonitorDeImpressao;
+
+uses
+  Vcl.Forms,
+  UPrincipal in 'UPrincipal.pas' {Form3},
+  UImpressaoPDF in 'UImpressaoPDF.pas',
+  UFrmConfiguracoes in 'UFrmConfiguracoes.pas' {frmConfiguracoes};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm3, Form3);
+  Application.CreateForm(TfrmConfiguracoes, frmConfiguracoes);
+  Application.Run;
+end.

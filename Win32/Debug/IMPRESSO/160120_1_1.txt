@@ -1,0 +1,17 @@
+MARCOS SISTEMAS
+Av Parana, 1358 S
+EXTRATO VENDAS 0001
+
+-------------------------------------
+Cod	Desc		Qtd	R$
+-------------------------------------
+100	AGUA C/GAS	1	5,00
+200	COCA COLA LATA	2      10,50
+
+-------------------------------------
+Total			       15,50
+
+
+
+[cortar papel]		
+

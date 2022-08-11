@@ -1,0 +1,24 @@
+unit UImpressao;
+
+interface
+
+uses
+  Vcl.Printers,
+  Winapi.ShellAPI,
+  System.SysUtils;
+
+type
+  TImpressaoPDF = class
+    procedure PrintFile(aFile: TFileName);
+  end;
+
+implementation
+
+{ TImpressaoPDF }
+
+procedure TImpressaoPDF.PrintFile(aFile: TFileName);
+begin
+
+end;
+
+end.
