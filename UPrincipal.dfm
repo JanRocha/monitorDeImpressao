@@ -13,6 +13,8 @@ object frmPrincipal: TfrmPrincipal
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  OnDestroy = FormDestroy
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 18
   object Panel1: TPanel
@@ -69,26 +71,18 @@ object frmPrincipal: TfrmPrincipal
       ScrollBars = ssVertical
       TabOrder = 1
     end
-    object AcroPDF1: TAcroPDF
-      Left = 776
-      Top = 280
-      Width = 16
-      Height = 24
-      TabOrder = 2
-      Visible = False
-      ControlData = {000E0000A70100007B020000}
-    end
   end
   object Timer1: TTimer
+    Enabled = False
     OnTimer = Timer1Timer
-    Left = 360
-    Top = 160
+    Left = 336
+    Top = 112
   end
-  object Timer2: TTimer
+  object tmrBaixarEImprimir: TTimer
     Interval = 5000
-    OnTimer = Timer2Timer
-    Left = 432
-    Top = 168
+    OnTimer = tmrBaixarEImprimirTimer
+    Left = 240
+    Top = 48
   end
   object TrayIcon1: TTrayIcon
     Animate = True
@@ -241,7 +235,7 @@ object frmPrincipal: TfrmPrincipal
   object Timer3: TTimer
     Interval = 2000
     OnTimer = Timer3Timer
-    Left = 232
-    Top = 248
+    Left = 488
+    Top = 120
   end
 end

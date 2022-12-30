@@ -8,14 +8,13 @@ uses
   classes,
   System.SysUtils,
   ACBrPosPrinter,
-  UFuncao;
+  UFuncoes;
 
 type
   TControllerImpressora = class(TPersistent)
   private
-    FFuncoes: TFuncao;
+    FFuncoes: TFuncoes;
     FIni: string;
-    FFuncao: TFuncao;
     FLinhasPular: integer;
     FLinhasBuffer: integer;
     FModelo: integer;
@@ -83,16 +82,15 @@ end;
 
 constructor TControllerImpressora.create(pNomeImpressora: string);
 begin
-  FFuncao        := TFuncao.Create;
+  FFuncoes        := TFuncoes.Create;
   FACBrPosPrinter:= TACBrPosPrinter.Create(nil);
   Fini:= GetCurrentDir + '/CONFIG.INI';
-  FFuncoes:= TFuncao.Create;
   FFuncoes.SerializarINI(Fini,pNomeImpressora, Self)
 end;
 
 destructor TControllerImpressora.Destroy;
 begin
-  FFuncao.Free;
+  FFuncoes.Free;
   FACBrPosPrinter.Free;
   inherited;
 end;

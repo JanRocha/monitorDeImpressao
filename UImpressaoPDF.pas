@@ -3,7 +3,7 @@ unit UImpressaoPDF;
 interface
 
 uses
-  AcroPDFLib_TLB,
+  //AcroPDFLib_TLB,
   Winapi.ShellAPI,
   Winapi.Windows,
   Vcl.Printers,
@@ -27,7 +27,7 @@ type
     FHandler: TIdSSLIOHandlerSocketOpenSSL;
     FFuncoes: TFuncoes;
     FConfig: TConfiguracoes;
-    FAcroPDF: TAcroPDF;
+    //FAcroPDF: TAcroPDF;
     FnomeImpressora: string;
     FImpressoraPadrao:string;
     FMemo: TMemo;
@@ -37,7 +37,7 @@ type
     procedure VerificarDiretorio();
   published
     property nomeImpressora: string read FnomeImpressora write FnomeImpressora;
-    property AcroPDF:TAcroPDF read FAcroPDF write FAcroPDF;
+   // property AcroPDF:TAcroPDF read FAcroPDF write FAcroPDF;
     property Memo: TMemo read FMemo write FMemo;
   public
     procedure Exibir(msg:string);
@@ -113,8 +113,8 @@ end;
 destructor TImpressaoPDF.Destroy;
 var i:integer;
 begin
-  if Assigned(FAcroPDF) then
-    i:= FAcroPDF.ControlInterface._AddRef;
+  //if Assigned(FAcroPDF) then
+  //  i:= FAcroPDF.ControlInterface._AddRef;
   FFuncoes.Free;
   FConfig.Free;
   FHandler.Free;
@@ -167,10 +167,10 @@ begin
     SetDefaultPrinter(nomeImpressora);
 
 
-  FAcroPDF.Visible := False; // deixa o componente invisível
-  FAcroPDF.src     :=aFile; // carrega o arquivo PDF
-  FAcroPDF.printAll; // abre a janela de impressão
-  FAcroPDF.src     := '';
+  //FAcroPDF.Visible := False; // deixa o componente invisível
+ // FAcroPDF.src     :=aFile; // carrega o arquivo PDF
+  //FAcroPDF.printAll; // abre a janela de impressão
+  //FAcroPDF.src     := '';
  { for i := 0 to Printer.Printers.Count - 1 do
   begin
     if Printer.printers[i] = nomeImpressora then

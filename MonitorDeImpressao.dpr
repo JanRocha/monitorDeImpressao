@@ -1,6 +1,7 @@
 program MonitorDeImpressao;
 
 uses
+  MidasLib,
   Vcl.Forms,
   UPrincipal in 'UPrincipal.pas' {frmPrincipal},
   UImpressaoPDF in 'UImpressaoPDF.pas',

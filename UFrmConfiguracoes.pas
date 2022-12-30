@@ -302,7 +302,10 @@ begin
   lChaveIni := TStringList.Create();
   try
     lIni.ReadSections(lChaveIni);
-    lChaveIni.Delete(lChaveIni.IndexOf('CONFIG'));
+
+    if (lChaveIni.IndexOf('CONFIG') >= 0) then
+        lChaveIni.Delete(lChaveIni.IndexOf('CONFIG'));
+
     CDSFilaTxt.close;
     CDSFilaTxt.CreateDataSet;
     for I := 0 to lChaveIni.Count -1 do

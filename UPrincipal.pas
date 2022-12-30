@@ -8,7 +8,7 @@ uses
   Vcl.StdCtrls,
   UImpressaoPDF,
   Vcl.OleCtrls,
-  AcroPDFLib_TLB,
+ // AcroPDFLib_TLB,
   Vcl.ExtCtrls,
   UFrmConfiguracoes,
   IdBaseComponent,
@@ -17,7 +17,7 @@ uses
   IdTCPClient,
   UImpressaoTXT,
   UImpressaoXML,
-  IdHTTP, Vcl.AppEvnts
+  IdHTTP, Vcl.AppEvnts, UConfiguracoes
   ;
 
 type
@@ -28,20 +28,22 @@ type
     Button2: TButton;
     Memo1: TMemo;
     Timer1: TTimer;
-    Timer2: TTimer;
+    tmrBaixarEImprimir: TTimer;
     TrayIcon1: TTrayIcon;
     ApplicationEvents1: TApplicationEvents;
     Timer3: TTimer;
-    AcroPDF1: TAcroPDF;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
-    procedure Timer2Timer(Sender: TObject);
+    procedure tmrBaixarEImprimirTimer(Sender: TObject);
     procedure TrayIcon1Click(Sender: TObject);
     procedure ApplicationEvents1Minimize(Sender: TObject);
     procedure Timer3Timer(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
+     FConfig: TConfiguracoes;
   public
     { Public declarations }
     procedure Imprimir();
@@ -69,66 +71,79 @@ end;
 
 procedure TfrmPrincipal.Baixar;
 var
-  oImpressao:TImpressaoPDF;
+ // oImpressao:TImpressaoPDF;
   oImpressaoTxt: TImpressaoTXT;
   oImpressaoXML: TImpressaoXML;
 begin
-  oImpressao           := TImpressaoPDF.Create();
-  oImpressaoTxt        := TImpressaoTXT.Create();
-  oImpressaoXML         := TImpressaoXML.Create();
   try
-    oImpressao.Memo    := Memo1;
-    oImpressao.BaixarPDF();
-    oImpressaoTxt.Memo := Memo1;
-    oImpressaoTxt.BaixarTXT();
-    oImpressaoXML.Memo:= Memo1;
-    oImpressaoXML.BaixarXML();
-  finally
-    oImpressao.Free;
-    oImpressaoTxt.Free;
-    oImpressaoXML.Free;
+    // oImpressao           := TImpressaoPDF.Create();
+    oImpressaoTxt        := TImpressaoTXT.Create();
+    oImpressaoXML         := TImpressaoXML.Create();
+    try
+     // oImpressao.Memo    := Memo1;
+     // oImpressao.BaixarPDF();
+      oImpressaoTxt.Memo := Memo1;
+      oImpressaoTxt.BaixarTXT();
+      oImpressaoXML.Memo:= Memo1;
+      oImpressaoXML.BaixarXML();
+    finally
+      //oImpressao.Free;
+      oImpressaoTxt.Free;
+      oImpressaoXML.Free;
+    end;
+  except on E: Exception do
   end;
 end;
 
 procedure TfrmPrincipal.Button1Click(Sender: TObject);
 begin
   Timer1.Enabled:= false;
-  Timer2.Enabled:= false;
+  tmrBaixarEImprimir.Enabled:= false;
   baixar();
   Imprimir();
   Timer1.Enabled:= true;
-  Timer2.Enabled:= true;
+  tmrBaixarEImprimir.Enabled:= true;
 end;
 
 procedure TfrmPrincipal.Button2Click(Sender: TObject);
 var
   oFRM: TfrmConfiguracoes;
 begin
-  Timer1.Enabled:= false;
-  Timer2.Enabled:= false;
+  //Timer1.Enabled:= false;
+  tmrBaixarEImprimir.Enabled:= false;
   oFRM:= TfrmConfiguracoes.Create(nil);
   try
     oFRM.ShowModal();
   finally
     oFRM.Free;
   end;
-  Timer1.Enabled:= true;
-  Timer2.Enabled:= true;
+ // Timer1.Enabled:= true;
+  tmrBaixarEImprimir.Enabled:= true;
+end;
+
+procedure TfrmPrincipal.FormDestroy(Sender: TObject);
+begin
+  FConfig.Free();
+end;
+
+procedure TfrmPrincipal.FormShow(Sender: TObject);
+begin
+  FConfig := TConfiguracoes.Create();
 end;
 
 procedure TfrmPrincipal.Imprimir;
 var
-  oImpressao:TImpressaoPDF;
+ // oImpressao:TImpressaoPDF;
   oImpressaoTXT: TImpressaoTXT;
   oImpressaoXML: TImpressaoXML;
 begin
-  oImpressao           := TImpressaoPDF.Create();
+ // oImpressao           := TImpressaoPDF.Create();
   oImpressaoTXT        := TImpressaoTXT.Create();
   oImpressaoXML        := TImpressaoXML.Create();
   try
-    oImpressao.AcroPDF := AcroPDF1;
-    oImpressao.Memo    := Memo1;
-    oImpressao.Print();
+    //oImpressao.AcroPDF := AcroPDF1;
+   // oImpressao.Memo    := Memo1;
+   // oImpressao.Print();
 
     oImpressaoTXT.Memo := Memo1;
     oImpressaoTXT.Print();
@@ -136,7 +151,7 @@ begin
     oImpressaoXML.Memo:= Memo1;
     oImpressaoXML.Print();
   finally
-    oImpressao.Free;
+   // oImpressao.Free;
     oImpressaoTXT.Free;
     oImpressaoXML.Free;
   end;
@@ -151,14 +166,16 @@ begin
  // Timer2.Enabled:= true;
 end;
 
-procedure TfrmPrincipal.Timer2Timer(Sender: TObject);
+procedure TfrmPrincipal.tmrBaixarEImprimirTimer(Sender: TObject);
 begin
-  Timer1.Enabled:= false;
-  Timer2.Enabled:= false;
+  if (FConfig.CaminhoServidor = EmptyStr) or
+     (FConfig.CodigoCliente = EmptyStr) then
+    Exit;
+
+  tmrBaixarEImprimir.Enabled:= false;
   baixar();
   Imprimir();
-  Timer1.Enabled:= true;
-  Timer2.Enabled:= true;
+  tmrBaixarEImprimir.Enabled:= true;
 end;
 
 procedure TfrmPrincipal.Timer3Timer(Sender: TObject);
@@ -166,7 +183,7 @@ begin
   Timer3.Enabled := False;
   Application.Minimize;
   Timer1.Enabled := true;
-  Timer2.Enabled := true;
+  tmrBaixarEImprimir.Enabled := true;
 end;
 
 procedure TfrmPrincipal.TrayIcon1Click(Sender: TObject);
