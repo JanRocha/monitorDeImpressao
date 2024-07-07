@@ -17,6 +17,7 @@ uses
   IdSSLOpenSSL,
   IdHTTP,
   Controller.Impressora,
+  IdSSLOpenSSLHeaders,
   Vcl.StdCtrls;
 
 type
@@ -95,7 +96,8 @@ constructor TImpressaoTXT.Create;
 begin
   FIdHTTP  := TIdHTTP.Create(nil);
   FHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
-  FHandler.SSLOptions.Method := sslvTLSv1_2;
+  IdSSLOpenSSLHeaders.OPENSSL_API_VERSION := opSSL_3_0;
+  FHandler.SSLOptions.Method := sslvTLSv1_3;
   FidHTTP.IOHandler          := FHandler;
   FFuncoes                   := TFuncoes.Create;
   FConfig                    := TConfiguracoes.Create;

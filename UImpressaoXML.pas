@@ -18,6 +18,7 @@ uses
   ACBrBase, ACBrDFe, ACBrNFe, ACBrNFeDANFeESCPOS,ACBrPosPrinter,ACBrDANFCeFortesFr,
   pcnConversao,
   Controller.Impressora,
+  IdSSLOpenSSLHeaders,
   Vcl.StdCtrls, Vcl.Forms;
 
 type
@@ -95,7 +96,8 @@ constructor TImpressaoXML.Create;
 begin
   FIdHTTP  := TIdHTTP.Create(nil);
   FHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
-  FHandler.SSLOptions.Method := sslvTLSv1_2;
+  IdSSLOpenSSLHeaders.OPENSSL_API_VERSION := opSSL_3_0;
+  FHandler.SSLOptions.Method := sslvTLSv1_3;
   FidHTTP.IOHandler          := FHandler;
   FImpressao                 := TControllerImpressora.create;
   FFuncoes                   := TFuncoes.Create;
