@@ -109,7 +109,7 @@ procedure TfrmPrincipal.Button2Click(Sender: TObject);
 var
   oFRM: TfrmConfiguracoes;
 begin
-  //Timer1.Enabled:= false;
+  Timer1.Enabled:= false;
   tmrBaixarEImprimir.Enabled:= false;
   oFRM:= TfrmConfiguracoes.Create(nil);
   try
@@ -117,7 +117,7 @@ begin
   finally
     oFRM.Free;
   end;
- // Timer1.Enabled:= true;
+  Timer1.Enabled:= true;
   tmrBaixarEImprimir.Enabled:= true;
 end;
 

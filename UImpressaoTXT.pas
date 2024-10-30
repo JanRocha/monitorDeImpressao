@@ -44,7 +44,8 @@ type
 implementation
 
 uses
-  Vcl.Forms;
+  Vcl.Forms,
+  RESTRequest4D;
 
 { TImpressaoTXT }
 
@@ -64,24 +65,32 @@ begin
     for i2 := 1 to qtd do
     begin
       arquivo:=  FConfig.CodigoCliente+ '_'+ IntToStr(FConfig.SequenciaTXT);
-      MyFile := TFileStream.Create(destino + arquivo + '_' +IntToStr(i2) + ext, fmCreate); // local no hd e nome do arquivo com a extensão, onde vai salvar.
+      var lString := TStringList.Create();
       try
         try
           request:= caminho +'/'+ arquivo + ext;
-          FIdHTTP.Get(request, MyFile); // fazendo o download do arquivo
+          var resp := TRequest.New.BaseURL(request)
+                    .Get;
+
+          if resp.StatusCode <> 200 then
+          begin
+            DeleteFile(destino + arquivo + '_' +IntToStr(i2) + ext);
+            exit;
+          end
+          else
+          begin
+            lString.Text := resp.Content;
+            lString.SaveToFile(destino + arquivo + '_' +IntToStr(i2) + ext);
+          end;
         except on E: Exception do
           begin
             FFuncoes.GravarLog('BaixarTXT(): '+E.Message);
           end;
         end;
       finally
-        MyFile.Free;
+        lString.Free;
       end;
-      if FIdHTTP.ResponseCode <> 200 then
-      begin
-        DeleteFile(destino + arquivo + '_' +IntToStr(i2) + ext);
-        exit;
-      end;
+
     end;
     FConfig.SequenciaTXT := FConfig.SequenciaTXT + 1;
     if FIdHTTP.ResponseCode = 200 then
@@ -96,8 +105,8 @@ constructor TImpressaoTXT.Create;
 begin
   FIdHTTP  := TIdHTTP.Create(nil);
   FHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
-  IdSSLOpenSSLHeaders.OPENSSL_API_VERSION := opSSL_3_0;
-  FHandler.SSLOptions.Method := sslvTLSv1_3;
+  //IdSSLOpenSSLHeaders.OPENSSL_API_VERSION := opSSL_3_0;
+  FHandler.SSLOptions.Method := sslvTLSv1_2;
   FidHTTP.IOHandler          := FHandler;
   FFuncoes                   := TFuncoes.Create;
   FConfig                    := TConfiguracoes.Create;

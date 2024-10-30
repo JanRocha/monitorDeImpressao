@@ -47,6 +47,9 @@ implementation
 
 { TImpressaoXML }
 
+uses
+  RESTRequest4D;
+
 procedure TImpressaoXML.BaixarXML;
 var
   arquivo,caminho, destino, ext, request: string;
@@ -68,7 +71,12 @@ begin
       try
         try
           request:= caminho +'/'+ arquivo + ext;
-          FIdHTTP.Get(request, MyFile); // fazendo o download do arquivo
+
+          var resp := TRequest.New.BaseURL(request)
+                    .Accept('application/json')
+                    .Get;
+
+        //  FIdHTTP.Get(request, MyFile); // fazendo o download do arquivo
         except on E: Exception do
           begin
             FFuncoes.GravarLog('BaixarXML(): '+E.Message);
@@ -96,8 +104,8 @@ constructor TImpressaoXML.Create;
 begin
   FIdHTTP  := TIdHTTP.Create(nil);
   FHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
-  IdSSLOpenSSLHeaders.OPENSSL_API_VERSION := opSSL_3_0;
-  FHandler.SSLOptions.Method := sslvTLSv1_3;
+  //IdSSLOpenSSLHeaders.OPENSSL_API_VERSION := opSSL_3_0;
+  FHandler.SSLOptions.Method := sslvTLSv1_2;
   FidHTTP.IOHandler          := FHandler;
   FImpressao                 := TControllerImpressora.create;
   FFuncoes                   := TFuncoes.Create;
